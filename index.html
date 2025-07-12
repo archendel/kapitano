@@ -1,71 +1,121 @@
-<!DOCTYPE html>
-<html lang="ko">
+<!DOCTYPE html><html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>월왕국</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>월왕국</title>
   <style>
+    * { box-sizing: border-box; }
     body {
       margin: 0;
-      padding: 0;
-      background-color: #f0f0f0;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, 'Helvetica Neue', sans-serif;
+      background-color: #f9f9f9;
+    }
+    header {
+      background-color: navy;
+      color: white;
+      padding: 1em;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      min-height: 100vh;
+      justify-content: space-between;
+    }
+    .menu-button {
+      font-size: 1.5em;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 240px;
+      height: 100%;
+      background-color: #fff;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+      padding: 1em;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+      z-index: 1000;
+    }
+    .sidebar.active {
+      transform: translateX(0);
+    }
+    .sidebar h2 {
+      margin-top: 0;
+      font-size: 1.2em;
+      color: navy;
+    }
+    .sidebar a {
+      display: block;
+      padding: 0.5em 0;
+      text-decoration: none;
+      color: #333;
+    }
+    main {
+      padding: 2em;
       text-align: center;
     }
-
-    h1 {
-      color: navy;
-      font-size: 2em;
-      margin: 0.5em 0 0.2em;
-    }
-
-    p {
-      font-size: 1.2em;
-      margin: 0.2em 0 1.5em;
-    }
-
     .enter-button {
-      padding: 14px 28px;
+      padding: 1em 2em;
       font-size: 1em;
       background-color: navy;
       color: white;
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      transition: background-color 0.3s;
+      margin-top: 1.5em;
     }
-
-    .enter-button:hover {
-      background-color: #003366;
+    section {
+      display: none;
+      text-align: left;
+      padding: 1em;
+      max-width: 800px;
+      margin: auto;
     }
-
-    @media (max-width: 480px) {
-      h1 {
-        font-size: 1.5em;
-      }
-
-      p {
-        font-size: 1em;
-      }
-
-      .enter-button {
-        width: 80%;
-        max-width: 300px;
-        font-size: 1em;
-      }
+    section.active {
+      display: block;
     }
   </style>
 </head>
 <body>
-  <h1>안녕하세요!</h1>
-  <p>월왕국 공식 홈페이지입니다.</p>
-  <a href="https://open.kakao.com/o/g4QSyKRe" target="_blank">
-    <button class="enter-button">입장하기</button>
-  </a>
-</body>
+  <header>
+    <button class="menu-button" onclick="toggleSidebar()">&#9776;</button>
+    <div>월왕국 공식 홈페이지</div>
+  </header>  <nav class="sidebar" id="sidebar">
+    <h2>법령 정보</h2>
+    <a href="#" onclick="showLaw('constitution')">헌법</a>
+    <a href="#" onclick="showLaw('parliament')">의회법</a>
+    <a href="#" onclick="showLaw('court')">법원조직법</a>
+    <a href="#" onclick="showLaw('election')">선거법</a>
+  </nav>  <main>
+    <h1>월왕국 공식 홈페이지입니다.</h1>
+    <a href="https://open.kakao.com/o/g4QSyKRe" target="_blank">
+      <button class="enter-button">입장하기</button>
+    </a>
+  </main>  <section id="constitution">
+    <h2>헌법</h2>
+    <p>여기에 헌법 전문 내용이 들어갑니다.</p>
+  </section>
+  <section id="parliament">
+    <h2>의회법</h2>
+    <p>여기에 의회법 내용이 들어갑니다.</p>
+  </section>
+  <section id="court">
+    <h2>법원조직법</h2>
+    <p>여기에 법원조직법 내용이 들어갑니다.</p>
+  </section>
+  <section id="election">
+    <h2>선거법</h2>
+    <p>여기에 선거법 내용이 들어갑니다.</p>
+  </section>  <script>
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('active');
+    }
+    function showLaw(id) {
+      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      document.getElementById('sidebar').classList.remove('active');
+    }
+  </script></body>
 </html>
